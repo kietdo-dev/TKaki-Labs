@@ -127,7 +127,7 @@ export default function Site() {
         {product ? (
           <ProductDetail key={product.id} product={product} onZoom={openZoom} />
         ) : (
-          <HomePage product={data.products[0]} />
+          <HomePage products={data.products} />
         )}
       </main>
       <Footer />

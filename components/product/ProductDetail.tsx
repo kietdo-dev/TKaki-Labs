@@ -43,9 +43,12 @@ export default function ProductDetail({
               <button
                 key={galleryImage.src}
                 className="thumb"
-                aria-label={`Xem ảnh ${index + 1}`}
+                aria-label={`Xem ảnh ${index + 1}: ${galleryImage.alt}`}
                 aria-pressed={index === imageIndex}
-                onClick={() => setImageIndex(index)}
+                onClick={() => {
+                  setImageIndex(index);
+                  setSelectedColor(null);
+                }}
               >
                 <img
                   src={galleryImage.thumb}
@@ -57,7 +60,7 @@ export default function ProductDetail({
             ))}
           </div>
           <p className="gallery-note">
-            Hình ảnh do TKaki-Labs cung cấp. Màu đang bán sẽ được xác nhận sau.
+            Hình ảnh do TKaki-Labs cung cấp. Màu sắc thể hiện theo ảnh; tình trạng còn hàng cần được xác nhận.
           </p>
         </div>
         <div className="detail-copy">
@@ -72,8 +75,8 @@ export default function ProductDetail({
           <dl className="spec-list">
             <div className="spec-row"><dt>Chất liệu</dt><dd>{product.fabric || 'Đang cập nhật'}</dd></div>
             <div className="spec-row"><dt>Phom quần</dt><dd>{product.fit || 'Đang cập nhật'}</dd></div>
-            <div className="spec-row"><dt>Màu đang bán</dt><dd>{product.colors.length ? product.colors.map((color) => color.name).join(' · ') : 'Chưa có thông tin'}</dd></div>
-            <div className="spec-row"><dt>Size</dt><dd>{product.sizes.length ? product.sizes.join(' · ') : 'Đang cập nhật'}</dd></div>
+            <div className="spec-row"><dt>Màu trong ảnh</dt><dd>{product.colors.length ? product.colors.map((color) => color.name).join(' · ') : 'Chưa có thông tin'}</dd></div>
+            <div className="spec-row"><dt>Size</dt><dd>{product.sizes.length ? product.sizes.join(' · ') : 'Liên hệ shop'}</dd></div>
           </dl>
           {product.colors.length > 0 && (
             <div className="variant-buttons" role="group" aria-label="Chọn ảnh theo màu">

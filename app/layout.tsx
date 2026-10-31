@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     title: 'TKaki-Labs — Quần short kaki nam',
     description:
       'Quần short kaki nam được sản xuất bởi xưởng may gia đình TKaki-Labs.',
-    images: [{ url: '/assets/short-1.webp', width: 1200, height: 1200, alt: 'Quần short TKaki-Labs' }],
+    images: [{ url: '/assets/products/short/cover.webp', width: 1200, height: 800, alt: 'Quần short kaki TKaki-Labs' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'TKaki-Labs — Quần short kaki nam',
     description:
       'Quần short kaki nam được sản xuất bởi xưởng may gia đình TKaki-Labs.',
-    images: ['/assets/short-1.webp'],
+    images: ['/assets/products/short/cover.webp'],
   },
   robots: {
     index: true,
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi">
       <head>
-        <link rel="preload" href="/assets/short-1.webp" as="image" />
+        <link rel="preload" href="/assets/products/short/cover.webp" as="image" />
       </head>
       <body>{children}</body>
     </html>

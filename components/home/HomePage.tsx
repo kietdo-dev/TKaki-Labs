@@ -6,10 +6,10 @@ import { arrow, Buy, getShopeeUrl, Price } from '@/components/shared/Shopee';
 import SizeTable from '@/components/product/SizeTable';
 
 function ProductCollection({ product }: { product: Product }) {
-  const image = product.gallery[product.gallery.length - 1];
+  const image = product.gallery[product.colors[0]?.imageIndex ?? 0];
 
   return (
-    <div className="collection-grid">
+    <article className="product-card">
       <a
         className="product-image-link"
         href={`#san-pham/${product.id}`}
@@ -23,31 +23,28 @@ function ProductCollection({ product }: { product: Product }) {
         {product.nameIsTemporary && <p className="pending">Tên sản phẩm tạm thời</p>}
         <Price value={product.price} />
         <p style={{ marginTop: 22 }}>
-          Xem những hình ảnh đầu tiên của mẫu quần short kaki từ TKaki-Labs.
+          Xem ảnh sản phẩm và các màu được thể hiện trong bộ sưu tập.
         </p>
         <dl className="product-data">
           <div>
-            <dt>Màu &amp; size</dt>
-            <dd>
-              {product.colors.length || product.sizes.length
-                ? [...product.colors.map((color) => color.name), ...product.sizes].join(' · ')
-                : 'Đang cập nhật'}
-            </dd>
+            <dt>Màu trong ảnh</dt>
+            <dd>{product.colors.length ? product.colors.map((color) => color.name).join(' · ') : 'Đang cập nhật'}</dd>
           </div>
           <div>
-            <dt>Thông tin sản phẩm</dt>
-            <dd>{product.fabric || 'Đang cập nhật'}</dd>
+            <dt>Size</dt>
+            <dd>{product.sizes.length ? product.sizes.join(' · ') : 'Liên hệ shop'}</dd>
           </div>
         </dl>
         <a className="btn btn-outline" href={`#san-pham/${product.id}`}>
           Xem chi tiết <span aria-hidden="true">→</span>
         </a>
       </div>
-    </div>
+    </article>
   );
 }
 
-export default function HomePage({ product }: { product: Product }) {
+export default function HomePage({ products }: { products: Product[] }) {
+  const product = products[0];
   const [imageIndex, setImageIndex] = useState(0);
   const imageCount = product.gallery.length;
   const hasShop = Boolean(getShopeeUrl(data.links.shopeeShop));
@@ -104,10 +101,12 @@ export default function HomePage({ product }: { product: Product }) {
       <section id="san-pham" className="section">
         <div className="container">
           <div className="section-heading">
-            <h2>Bộ sưu tập nhỏ.<br />Cho những ngày thường.</h2>
+            <h2>Ba kiểu quần short.<br />Cho những ngày thường.</h2>
             <p className="eyebrow">01 — SẢN PHẨM</p>
           </div>
-          <ProductCollection product={product} />
+          <div className="product-cards">
+            {products.map((item) => <ProductCollection key={item.id} product={item} />)}
+          </div>
         </div>
       </section>
 
@@ -115,9 +114,9 @@ export default function HomePage({ product }: { product: Product }) {
         <div className="container size-layout">
           <div className="size-intro">
             <p className="eyebrow">02 — CHỌN SIZE</p>
-            <h2>Chọn size từ số đo.</h2>
+            <h2>Bảng size quần short kaki.</h2>
             <p>
-              Đối chiếu số đo trước khi chọn quần. Bảng size của mẫu sản phẩm sẽ được cập nhật tại đây.
+              Chiều dài quần và cân nặng tham khảo theo bảng size do TKaki-Labs cung cấp.
             </p>
             <a className="text-link" href={`tel:${data.contact.phone}`}>
               Hỏi shop về size {arrow}
