@@ -101,7 +101,7 @@ export default function HomePage({ products }: { products: Product[] }) {
       <section id="san-pham" className="section">
         <div className="container">
           <div className="section-heading">
-            <h2>Ba kiểu quần short.<br />Cho những ngày thường.</h2>
+            <h2>Bốn kiểu quần short.<br />Cho những ngày thường.</h2>
             <p className="eyebrow">01 — SẢN PHẨM</p>
           </div>
           <div className="product-cards">
